@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.paper {
+  background-color: #dfdbe5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.Dictionary {
+  display: flex;
+  font-family: "Source Sans Pro", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  gap: 1.5rem;
+  width: clamp(25%, 500px, 100%);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  margin: 0 0.25rem 0 0;
+  font-size: 0.75em;
+  line-height: 1;
+  background-color: #93e5ab;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 50rem;
+}
+
+.search {
+  text-align: center;
+  margin: 0 auto;
+  min-width: 14rem;
+}
+
+.clear {
+  cursor: pointer;
+  border-radius: 9999px;
+  padding: 0.5rem;
+  background-color: gray;
+  opacity: 0.25;
+  position: absolute;
+  right: 0;
+  top: 1px;
+  transform: translate(-75%, 30%);
+}
+
+.clear::before {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: small;
+  font-weight: bold;
+  color: white;
+  content: "\00D7";
+}
+
+.about {
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  position: relative;
+}
+
+.form {
+  position: relative;
+}
+
+.form input {
+  height: 1.75rem;
+  width: 100%;
+  border: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.form input:focus-visible {
+  outline: none;
+}
+
+.error {
+  text-align: center;
+  display: block;
+}
+
+.result {
+  margin: 0 auto;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #19323c;
+  border-radius: 12px 12px 0 0;
+}
+
+.word {
+  color: white;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.phonetic {
+  color: white;
+}
+
+.sound {
+  color: white;
+  cursor: pointer;
+}
+
+.sound:before {
+  content: "\e04e";
+}
+
+.data {
+  margin: 1rem;
+}
+
+.type {
+  font-weight: bold;
+}
+
+.synonyms {
+  margin-top: 0.25rem;
+  line-height: 2;
+}
+
+.type p {
+  margin: 0rem;
+}
+
+.definitions p {
+  margin: 0.75rem 0;
+}
