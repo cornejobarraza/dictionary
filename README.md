@@ -1,3 +1,11 @@
 # English dictionary
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Application that provides definitions and synonims by making a request to the [Free Dictionary API](https://dictionaryapi.dev/).
+
+This project was created with:
+
+- [React 18.2](https://reactjs.org/)
+- [Framer Motion](https://www.framer.com/motion/) for animations
+- [React Spinners](https://www.davidhu.io/react-spinners/) for loading state
+
+Deployed to GitHub Pages using the [gh-pages](https://www.npmjs.com/package/gh-pages) package.
