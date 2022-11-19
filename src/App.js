@@ -84,6 +84,19 @@ function App() {
     }
   };
 
+  const handleClick = (synonym) => {
+    searchInput.current.value = synonym;
+    const regEx = /[^a-zA-Z\s]+/;
+    if (!regEx.test(synonym) && synonym.split(" ").length > 1) {
+      dispatch({
+        type: ACTION_TYPES.INVALID_QUERY,
+        payload: "Please do one word per search",
+      });
+    } else {
+      setQuery(synonym);
+    }
+  };
+
   const debounce = (handler) => {
     let timeout;
 
@@ -112,7 +125,9 @@ function App() {
                   Free Dictionary API
                 </a>
               </small>
-              <h2 style={{ marginTop: "0" }}>English dictionary</h2>
+              <h2 style={{ marginTop: "0" }}>
+                <span style={{ color: "darkblue" }}>English</span> <span style={{ color: "darkred" }}>dictionary</span>
+              </h2>
               <div className="input">
                 <input
                   placeholder="Search here..."
@@ -201,10 +216,15 @@ function App() {
                         </div>
                         {meaning.synonyms.length > 0 && (
                           <div className="synonyms">
-                            {meaning.synonyms.map((synonim, index) => (
-                              <span key={index} className="badge">
-                                {synonim.charAt(0).toUpperCase()}
-                                {synonim.slice(1)}
+                            {meaning.synonyms.map((synonym, index) => (
+                              <span
+                                key={index}
+                                className="badge"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleClick(synonym)}
+                              >
+                                {synonym.charAt(0).toUpperCase()}
+                                {synonym.slice(1)}
                               </span>
                             ))}
                           </div>
