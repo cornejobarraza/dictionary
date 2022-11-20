@@ -120,14 +120,12 @@ function App() {
                   href="https://dictionaryapi.dev/"
                   target="_blank"
                   rel="noreferrer"
-                  style={{ textDecoration: "none", color: "black", fontWeight: "bold" }}
+                  style={{ textDecoration: "none", color: "darkred", fontWeight: "bold" }}
                 >
                   Free Dictionary API
                 </a>
               </small>
-              <h2 style={{ marginTop: "0" }}>
-                <span style={{ color: "darkblue" }}>English</span> <span style={{ color: "darkred" }}>dictionary</span>
-              </h2>
+              <h2 style={{ marginTop: "0" }}>English dictionary</h2>
               <div className="input">
                 <input
                   placeholder="Search here..."
