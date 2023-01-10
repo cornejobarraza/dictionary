@@ -120,12 +120,12 @@ function App() {
                   href="https://dictionaryapi.dev/"
                   target="_blank"
                   rel="noreferrer"
-                  style={{ textDecoration: "none", color: "darkred", fontWeight: "bold" }}
+                  style={{ textDecoration: "none", color: "black", fontWeight: "bold" }}
                 >
                   Free Dictionary API
                 </a>
               </small>
-              <h2 style={{ marginTop: "0" }}>English dictionary</h2>
+              <h2 style={{ margin: "0" }}>English dictionary</h2>
               <div className="input">
                 <input
                   placeholder="Search here..."
@@ -155,22 +155,44 @@ function App() {
                   }}
                 />
               </div>
+              <AnimatePresence mode="wait">
+                {state.status.error && (
+                  <motion.div
+                    key="error"
+                    className="error"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <p style={{ margin: "0", fontSize: "0.95em", fontWeight: "bold" }}>{state.status.errorMsg}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <AnimatePresence mode="wait">
+                {state.response.data.length < 1 && (
+                  <motion.div
+                    key="hint"
+                    className="hint"
+                    style={{ marginTop: "1.25rem" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "center", fontSize: "0.95em" }}>
+                      Click on <span className="sound material-symbols-rounded"></span> to listen to pronunciation
+                    </div>
+                    <div style={{ marginTop: "0.75rem", fontSize: "0.95em" }}>
+                      Click on{" "}
+                      <span className="badge" style={{ margin: "0" }}>
+                        Word
+                      </span>{" "}
+                      to search for a synonym
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
-          <AnimatePresence mode="wait">
-            {state.status.error && (
-              <motion.div
-                key="error"
-                className="error"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-              >
-                <p style={{ margin: "0", fontSize: "0.9em" }}>{state.status.errorMsg}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
           <AnimatePresence mode="wait">
             {state.response.data.length > 0 && !state.status.loading && (
               <motion.div
@@ -193,6 +215,7 @@ function App() {
                   {state.response.audio && (
                     <span
                       className="sound material-symbols-rounded"
+                      style={{ cursor: "pointer" }}
                       onClick={() => {
                         state.response.audio.play();
                       }}
