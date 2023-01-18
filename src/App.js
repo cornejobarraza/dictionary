@@ -1,8 +1,18 @@
 import { useEffect, useReducer, useState, useRef } from "react";
-import { ACTION_TYPES } from "actionTypes";
 import { reducer, INITIAL_STATE } from "reducer";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { BeatLoader } from "react-spinners";
+
+export const ACTION_TYPES = {
+  CLEAR_STATUS: "CLEAR_STATUS",
+  EMPTY_QUERY: "EMPTY_QUERY",
+  INVALID_QUERY: "INVALID_QUERY",
+  FETCH_START: "FETCH_START",
+  FETCH_SUCCESS: "FETCH_SUCCESS",
+  FETCH_ERROR: "FETCH_ERROR",
+  ADD_PHONETIC: "ADD_PHONETIC",
+  ADD_AUDIO: "ADD_AUDIO",
+};
 
 function App() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
@@ -133,12 +143,13 @@ function App() {
                   disabled={state.status.loading}
                   ref={searchInput}
                 />
-                {query.length > 0 && !state.status.loading && (
+                {((query.length > 0 && !state.status.loading) || state.status.error) && (
                   <span
                     className="clear"
                     onClick={() => {
                       searchInput.current.value = "";
                       setQuery("");
+                      dispatch({ type: ACTION_TYPES.CLEAR_STATUS });
                     }}
                   ></span>
                 )}
@@ -164,24 +175,24 @@ function App() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <p style={{ margin: "0", fontSize: "0.95em", fontWeight: "bold" }}>{state.status.errorMsg}</p>
+                    <p style={{ margin: "0", fontSize: "0.9em" }}>{state.status.errorMsg}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
               <AnimatePresence mode="wait">
-                {state.response.data.length < 1 && (
+                {state.response.data.length < 1 && !state.status.loading && !state.status.error && (
                   <motion.div
                     key="hint"
                     className="hint"
-                    style={{ marginTop: "1.25rem" }}
+                    style={{ marginTop: "1.5rem" }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div style={{ display: "flex", justifyContent: "center", fontSize: "0.95em" }}>
+                    <div style={{ display: "flex", justifyContent: "center", fontSize: "0.9em" }}>
                       Click on <span className="sound material-symbols-rounded"></span> to listen to pronunciation
                     </div>
-                    <div style={{ marginTop: "0.75rem", fontSize: "0.95em" }}>
+                    <div style={{ marginTop: "0.75rem", fontSize: "0.9em" }}>
                       Click on{" "}
                       <span className="badge" style={{ margin: "0" }}>
                         Word
