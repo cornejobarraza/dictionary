@@ -29,6 +29,7 @@ function App() {
         if (res.status === 200) {
           const data = await res.json();
           dispatch({ type: ACTION_TYPES.FETCH_SUCCESS, payload: data });
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }
 
         if (res.status === 404) {
