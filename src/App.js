@@ -123,7 +123,7 @@ function App() {
     <div className="Dictionary">
       <LayoutGroup>
         <motion.div className="main">
-          <motion.div layout={"position"} className="search">
+          <motion.div className="search" layout="position">
             <div className="form">
               <small>
                 Made with{" "}
@@ -208,9 +208,9 @@ function App() {
           <AnimatePresence mode="wait">
             {state.response.data.length > 0 && !state.status.loading && (
               <motion.div
-                layout={"position"}
                 key="result"
                 className="result"
+                layout="position"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
