@@ -1,6 +1,6 @@
 export const INITIAL_STATE = {
   response: { data: [], phonetic: "", audio: null },
-  status: { loading: false, error: false, errorMsg: "" },
+  status: { loading: false, error: false, errorMsg: null },
 };
 
 export const reducer = (state, action) => {
@@ -8,12 +8,12 @@ export const reducer = (state, action) => {
     case "CLEAR_STATUS":
       return {
         ...state,
-        status: { loading: false, error: false, errorMsg: "" },
+        status: { loading: false, error: false, errorMsg: null },
       };
     case "EMPTY_QUERY":
       return {
         response: { data: [], phonetic: "", audio: null },
-        status: { loading: false, error: false, errorMsg: "" },
+        status: { loading: false, error: false, errorMsg: null },
       };
     case "INVALID_QUERY":
       return {
@@ -23,7 +23,7 @@ export const reducer = (state, action) => {
     case "FETCH_START":
       return {
         ...state,
-        status: { loading: true, error: false, errorMsg: "" },
+        status: { loading: true, error: false, errorMsg: null },
       };
     case "FETCH_SUCCESS":
       return {
