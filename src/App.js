@@ -185,7 +185,11 @@ function App() {
                   <motion.div
                     key="hint"
                     className="hint"
+<<<<<<< HEAD
                     style={{ cursor: "default", marginTop: "1.5rem" }}
+=======
+                    style={{ marginTop: "1.75rem" }}
+>>>>>>> 62d25f28b999e380506632a18afd51b0a68424df
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
@@ -210,7 +214,6 @@ function App() {
               <motion.div
                 key="result"
                 className="result"
-                layout="position"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
