@@ -185,7 +185,7 @@ function App() {
                   <motion.div
                     key="hint"
                     className="hint"
-                    style={{ marginTop: "1.5rem" }}
+                    style={{ cursor: "default", marginTop: "1.5rem" }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
@@ -221,21 +221,20 @@ function App() {
                     {state.response.data[0].word.charAt(0).toUpperCase()}
                     {state.response.data[0].word.slice(1)}
                   </span>
-                  {state.response.phonetic.length > 0 && (
-                    <small className="phonetic"> {state.response.phonetic} </small>
-                  )}
-                  {state.response.audio && (
-                    <span
-                      className="sound material-symbols-rounded"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        state.response.audio.play();
-                      }}
-                    ></span>
-                  )}
-                  <span className="badge" style={{ margin: "0 0 0 auto" }}>
-                    Synonym
-                  </span>
+                  <div className="pronunciation">
+                    {state.response.phonetic.length > 0 && (
+                      <small className="phonetic"> {state.response.phonetic} </small>
+                    )}
+                    {state.response.audio && (
+                      <span
+                        className="sound material-symbols-rounded"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          state.response.audio.play();
+                        }}
+                      ></span>
+                    )}
+                  </div>
                 </div>
                 {state.response.data.map((result, index) => (
                   <div key={index} className="body">
