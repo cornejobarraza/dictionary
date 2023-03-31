@@ -1,6 +1,6 @@
 # English dictionary
 
-Application that provides definitions and synonims by making a request to the [Free Dictionary API](https://dictionaryapi.dev/).
+Application that provides definitions and synonyms by making a request to the [Free Dictionary API](https://dictionaryapi.dev/).
 
 This project was created with:
 
