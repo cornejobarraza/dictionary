@@ -98,11 +98,7 @@ body {
 }
 
 .error {
-<<<<<<< HEAD
-  margin-top: 2rem;
-=======
-  margin-top: 1.75rem;
->>>>>>> 62d25f28b999e380506632a18afd51b0a68424df
+  margin-top: 1.5rem;
   text-align: center;
   display: block;
 }
