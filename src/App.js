@@ -14,6 +14,11 @@ export const ACTION_TYPES = {
   ADD_AUDIO: "ADD_AUDIO",
 };
 
+// RegEx to match numbers or symbols
+const numbersRegEx = /[^A-z\s]+/;
+// RegEx to match spaces
+const spacesRegEx = /[\s]+/;
+
 function App() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const [query, setQuery] = useState("");
@@ -28,7 +33,27 @@ function App() {
 
         if (res.status === 200) {
           const data = await res.json();
+
           dispatch({ type: ACTION_TYPES.FETCH_SUCCESS, payload: data });
+
+          const findPhonetic = data[0]?.phonetics.find((element) => element.text);
+
+          if (findPhonetic) {
+            let text = findPhonetic.text;
+            dispatch({ type: ACTION_TYPES.ADD_PHONETIC, payload: text });
+          } else {
+            dispatch({ type: ACTION_TYPES.ADD_PHONETIC, payload: "" });
+          }
+
+          const findAudio = data[0]?.phonetics.find((element) => element.audio.length > 0);
+
+          if (findAudio) {
+            let audio = new Audio(findAudio.audio);
+            dispatch({ type: ACTION_TYPES.ADD_AUDIO, payload: audio });
+          } else {
+            dispatch({ type: ACTION_TYPES.ADD_AUDIO, payload: null });
+          }
+
           window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }
 
@@ -47,64 +72,31 @@ function App() {
     }
   }, [query]);
 
-  useEffect(() => {
-    const handlePhonetics = () => {
-      const findPhonetic = state.response.data[0]?.phonetics.find((element) => element.text);
-
-      if (findPhonetic) {
-        let text = findPhonetic.text;
-        dispatch({ type: ACTION_TYPES.ADD_PHONETIC, payload: text });
-      } else {
-        dispatch({ type: ACTION_TYPES.ADD_PHONETIC, payload: "" });
-      }
-    };
-
-    const handleAudio = () => {
-      const findAudio = state.response.data[0]?.phonetics.find((element) => element.audio.length > 0);
-
-      if (findAudio) {
-        let audio = new Audio(findAudio.audio);
-        dispatch({ type: ACTION_TYPES.ADD_AUDIO, payload: audio });
-      } else {
-        dispatch({ type: ACTION_TYPES.ADD_AUDIO, payload: null });
-      }
-    };
-
-    handlePhonetics();
-    handleAudio();
-  }, [state.response.data]);
-
   const handleInput = (e) => {
     dispatch({ type: ACTION_TYPES.CLEAR_STATUS });
 
-    // RegEx to match numbers or symbols
-    const regEx = /[^a-zA-Z\s]+/;
     // Remove whitespaces from start and end
-    const text = e.target.value.toLocaleLowerCase().trim();
+    const text = e.target.value.toLowerCase().trim();
 
-    if (!regEx.test(text) && text.split(" ").length < 2) {
+    if (!numbersRegEx.test(text) && !spacesRegEx.test(text)) {
       setQuery(text);
     }
 
-    if (!regEx.test(text) && text.split(" ").length > 1) {
+    if (!numbersRegEx.test(text) && spacesRegEx.test(text)) {
       dispatch({ type: ACTION_TYPES.INVALID_QUERY, payload: "Please do one word per search" });
     }
 
-    if (regEx.test(text)) {
+    if (numbersRegEx.test(text)) {
       dispatch({ type: ACTION_TYPES.INVALID_QUERY, payload: "No numbers or symbols, please try again" });
     }
   };
 
   const handleClick = (synonym) => {
-    searchInput.current.value = synonym;
-    const regEx = /[^a-zA-Z\s]+/;
-    if (!regEx.test(synonym) && synonym.split(" ").length > 1) {
-      dispatch({
-        type: ACTION_TYPES.INVALID_QUERY,
-        payload: "Please do one word per search",
-      });
-    } else {
-      setQuery(synonym);
+    const text = synonym.toLowerCase().trim();
+
+    if (!numbersRegEx.test(text) && !spacesRegEx.test(text)) {
+      searchInput.current.value = synonym;
+      setQuery(text);
     }
   };
 
@@ -185,11 +177,7 @@ function App() {
                   <motion.div
                     key="hint"
                     className="hint"
-<<<<<<< HEAD
                     style={{ cursor: "default", marginTop: "1.5rem" }}
-=======
-                    style={{ marginTop: "1.75rem" }}
->>>>>>> 62d25f28b999e380506632a18afd51b0a68424df
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
