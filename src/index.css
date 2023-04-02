@@ -109,7 +109,7 @@ body {
 }
 
 .result {
-  width: clamp(25%, 300px, 100%);
+  min-width: clamp(25%, 250px, 100%);
   margin: 0 auto;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   background-color: white;
