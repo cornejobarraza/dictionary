@@ -1,6 +1,17 @@
 export const INITIAL_STATE = {
-  response: { data: [], phonetic: "", audio: null },
-  status: { loading: false, error: false, errorMsg: null },
+  response: { data: [], phonetic: "", audio: undefined },
+  status: { loading: false, error: false, message: "" },
+};
+
+export const ACTION_TYPES = {
+  CLEAR_STATUS: "CLEAR_STATUS",
+  EMPTY_QUERY: "EMPTY_QUERY",
+  INVALID_QUERY: "INVALID_QUERY",
+  FETCH_START: "FETCH_START",
+  FETCH_SUCCESS: "FETCH_SUCCESS",
+  FETCH_ERROR: "FETCH_ERROR",
+  ADD_PHONETIC: "ADD_PHONETIC",
+  ADD_AUDIO: "ADD_AUDIO",
 };
 
 export const reducer = (state, action) => {
@@ -8,22 +19,22 @@ export const reducer = (state, action) => {
     case "CLEAR_STATUS":
       return {
         ...state,
-        status: { loading: false, error: false, errorMsg: null },
+        status: { loading: false, error: false, message: "" },
       };
     case "EMPTY_QUERY":
       return {
-        response: { data: [], phonetic: "", audio: null },
-        status: { loading: false, error: false, errorMsg: null },
+        response: { data: [], phonetic: "", audio: undefined },
+        status: { loading: false, error: false, message: "" },
       };
     case "INVALID_QUERY":
       return {
         ...state,
-        status: { loading: false, error: true, errorMsg: action.payload },
+        status: { loading: false, error: true, message: action.payload },
       };
     case "FETCH_START":
       return {
         ...state,
-        status: { loading: true, error: false, errorMsg: null },
+        status: { loading: true, error: false, message: "" },
       };
     case "FETCH_SUCCESS":
       return {
@@ -33,7 +44,7 @@ export const reducer = (state, action) => {
     case "FETCH_ERROR":
       return {
         ...state,
-        status: { loading: false, error: true, errorMsg: action.payload },
+        status: { loading: false, error: true, message: action.payload },
       };
     case "ADD_PHONETIC":
       return {

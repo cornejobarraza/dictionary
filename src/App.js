@@ -1,18 +1,8 @@
 import { useEffect, useReducer, useState, useRef } from "react";
-import { reducer, INITIAL_STATE } from "reducer";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { BeatLoader } from "react-spinners";
 
-export const ACTION_TYPES = {
-  CLEAR_STATUS: "CLEAR_STATUS",
-  EMPTY_QUERY: "EMPTY_QUERY",
-  INVALID_QUERY: "INVALID_QUERY",
-  FETCH_START: "FETCH_START",
-  FETCH_SUCCESS: "FETCH_SUCCESS",
-  FETCH_ERROR: "FETCH_ERROR",
-  ADD_PHONETIC: "ADD_PHONETIC",
-  ADD_AUDIO: "ADD_AUDIO",
-};
+import { INITIAL_STATE, ACTION_TYPES, reducer } from "reducer";
 
 // RegEx to match numbers or symbols
 const numbersRegEx = /[^A-z\s]+/;
@@ -39,7 +29,7 @@ function App() {
           const findPhonetic = data[0]?.phonetics.find((element) => element.text);
 
           if (findPhonetic) {
-            let text = findPhonetic.text;
+            const text = findPhonetic.text;
             dispatch({ type: ACTION_TYPES.ADD_PHONETIC, payload: text });
           } else {
             dispatch({ type: ACTION_TYPES.ADD_PHONETIC, payload: "" });
@@ -48,7 +38,7 @@ function App() {
           const findAudio = data[0]?.phonetics.find((element) => element.audio.length > 0);
 
           if (findAudio) {
-            let audio = new Audio(findAudio.audio);
+            const audio = new Audio(findAudio.audio);
             dispatch({ type: ACTION_TYPES.ADD_AUDIO, payload: audio });
           } else {
             dispatch({ type: ACTION_TYPES.ADD_AUDIO, payload: null });
@@ -168,7 +158,7 @@ function App() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <p style={{ margin: "0", fontSize: "0.9em" }}>{state.status.errorMsg}</p>
+                    <p style={{ margin: "0", fontSize: "0.9em" }}>{state.status.message}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -242,7 +232,7 @@ function App() {
                             {meaning.synonyms.map((synonym, index) => (
                               <span
                                 key={index}
-                                className="badge"
+                                className={spacesRegEx.test(synonym) ? "badge danger" : "badge"}
                                 style={{ cursor: "pointer" }}
                                 onClick={() => handleClick(synonym)}
                               >
