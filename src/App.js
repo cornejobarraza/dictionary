@@ -232,7 +232,9 @@ function App() {
                             {meaning.synonyms.map((synonym, index) => (
                               <span
                                 key={index}
-                                className={spacesRegEx.test(synonym) ? "badge danger" : "badge"}
+                                className={
+                                  numbersRegEx.test(synonym) || spacesRegEx.test(synonym) ? "badge danger" : "badge"
+                                }
                                 style={{ cursor: "pointer" }}
                                 onClick={() => handleClick(synonym)}
                               >
