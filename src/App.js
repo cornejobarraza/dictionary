@@ -121,7 +121,7 @@ function App() {
               <h2 style={{ margin: "0" }}>English dictionary</h2>
               <div className="input">
                 <input
-                  placeholder="Search here..."
+                  placeholder="Search here"
                   onChange={debounce(handleInput)}
                   disabled={state.status.loading}
                   ref={searchInput}
