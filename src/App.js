@@ -113,12 +113,12 @@ function App() {
                   href="https://dictionaryapi.dev/"
                   target="_blank"
                   rel="noreferrer"
-                  style={{ textDecoration: "none", color: "black", fontWeight: "bold" }}
+                  style={{ fontSize: 16, textDecoration: "none", color: "#dc2626", fontWeight: "bold" }}
                 >
                   Free Dictionary API
                 </a>
               </small>
-              <h2 style={{ margin: "0" }}>English dictionary</h2>
+              <h2 style={{ margin: "0", fontSize: "1.75em" }}>English dictionary</h2>
               <div className="input">
                 <input
                   placeholder="Search here"
@@ -141,7 +141,6 @@ function App() {
                   loading={state.status.loading}
                   speedMultiplier={0.5}
                   cssOverride={{
-                    opacity: "0.5",
                     position: "absolute",
                     top: "1px",
                     right: "0",
@@ -158,7 +157,7 @@ function App() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <p style={{ margin: "0", fontSize: "0.9em" }}>{state.status.message}</p>
+                    <p style={{ margin: "0", fontWeight: "bold" }}>{state.status.message}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -172,11 +171,11 @@ function App() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div style={{ display: "flex", justifyContent: "center", fontSize: "0.9em" }}>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
                       Click on <span className="sound material-symbols-rounded"></span> to listen to pronunciation
                     </div>
-                    <div style={{ marginTop: "0.75rem", fontSize: "0.9em" }}>
-                      Click on{" "}
+                    <div style={{ marginTop: "0.75rem" }}>
+                      Click on a {" "}
                       <span className="badge" style={{ margin: "0" }}>
                         Word
                       </span>{" "}
